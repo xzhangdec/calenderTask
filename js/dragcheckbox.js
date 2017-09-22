@@ -14,6 +14,7 @@ var flag = 0; //indicate drag up or down, if(flag==1) up; if(flag==2) down
 
 function rangeMouseDown(e) {
     //check if it's right button of the mouse click
+    console.log("test");
     if (isRightClick(e)) {
         return false;
     } else {
