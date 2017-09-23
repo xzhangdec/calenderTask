@@ -24,6 +24,9 @@ $('.time').on('touchstart click', function(e) {
     $('.selectionBox').show();
 });
 
+$('.time').on('touchmove click', function(e) {
+    e.preventDefault(); //stops 'ghost clicks' (double clicking)
+})
 
 $('.time').on('touchend click', function(e) {
     e.preventDefault(); //stops 'ghost clicks' (double clicking)
