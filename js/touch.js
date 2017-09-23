@@ -77,7 +77,9 @@ $('#endTime').on('tap click', function(e) {
 
         if (selectedTime < timePeriod['startTime']) {
             alert('End time < Start Time, please select again');
+            remove_mark_box(num_convert_to_id(timePeriod['startTime']));
             $('.selectionBox').hide();
+            return;
         }
         else {
             timePeriod[$(this).attr('id')] = selectedTime;
