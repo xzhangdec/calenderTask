@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('click', function () {
     $('.time')
         .mousedown(rangeMouseDown)
         .mouseup(rangeMouseUp)
@@ -12,27 +12,23 @@ var arr1 = []; // all check boxes
 var arr2 = []; // current check boxes
 var flag = 0; //indicate drag up or down, if(flag==1) up; if(flag==2) down
 
-
 function rangeMouseDown(e) {
-    //check if it's right button of the mouse click
-    //f1("Mon8AM",true)
-    //log(f3(res_of_f2))
-    //console.log(id_convert_to_Num("mon1am"));
-    //console.log(num_convert_to_id(id_convert_to_Num("mon1am")));
+
     if (isRightClick(e)) {
         return false;
     } else {
-        //log(f2("MON8AM"))
         var allCells = $(".time");
         dragStart = allCells.index($(this));
         isDragging = true;
         if (typeof e.preventDefault != 'undefined') { e.preventDefault(); }
         document.documentElement.onselectstart = function () { return false; };
     }
+
 }
 
 function rangeMouseUp(e) {
     //check if it's right button of the mouse click
+    console.log('rangeMouseUp');
     if (isRightClick(e)) {
         return false;
     } else {
@@ -45,7 +41,6 @@ function rangeMouseUp(e) {
         }
 
         arr1 = arr1.concat(arr2);
-        console.log(arr1);
         arr1 = $.unique(arr1);
         for(var i = 0; i < arr1.length; i++){
             $(".time").eq(arr1[i]).find(':checkbox').prop('checked', true);
@@ -54,6 +49,7 @@ function rangeMouseUp(e) {
         if(dragStart == dragEnd){
             $(".time").eq(dragStart).find(':checkbox').prop('checked', false);
         }
+        mark_check_box("mon930pm");
 
         //alert(arr1.length);
 
