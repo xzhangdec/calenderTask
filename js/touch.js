@@ -34,26 +34,30 @@ $('.time').on('tap click', function(e) {
 
     timeArr.push(selectedTime);
 
-    $('.selectionBox').show();
+    //mark_check_box(defaultTime);
 
-    mark_check_box(defaultTime);
+    $('.selectionBox').show();
 });
 
 $('#startTime').on('tap click', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    //$(this).off('click');
+
+    mark_check_box(num_convert_to_id(selectedTime));
     startTimeClicked = true;
     if (timeArr.length === 1) {
         if ($(this).attr('id') in timePeriod) {
             alert('Start time already selected');
             $('.selectionBox').hide();
+            remove_mark_box(num_convert_to_id(selectedTime));
+            timeArr.pop();
+            //timePeriod = {};
+            return;
         } else {
             timePeriod[$(this).attr('id')] = selectedTime;
         }
     }
 
-    mark_check_box(num_convert_to_id(selectedTime));
     timeArr = [];
     $('.selectionBox').hide();
 });
@@ -65,20 +69,22 @@ $('#endTime').on('tap click', function(e) {
     //e.preventDefault(); //stops 'ghost clicks' (double clicking)
 
     if (timeArr.length === 1) {
-        if ($(this).attr('id') in timePeriod) {
-            alert('Start time already selected');
-            $('.selectionBox').hide();
-        }
-
         if (!('endTime' in timePeriod) && !('startTime' in timePeriod)) {
             alert('Select start time first');
             $('.selectionBox').hide();
+            remove_mark_box(num_convert_to_id(selectedTime));
+            timeArr.pop();
+            timePeriod = {};
+            return;
         }
 
         if (selectedTime < timePeriod['startTime']) {
             alert('End time < Start Time, please select again');
             remove_mark_box(num_convert_to_id(timePeriod['startTime']));
+            remove_mark_box(num_convert_to_id(selectedTime));
             $('.selectionBox').hide();
+            timeArr.pop();
+            timePeriod = {};
             return;
         }
         else {
