@@ -19,7 +19,7 @@ $('.time').on('touchmove click', function(e) {
     //e.preventDefault(); //stops 'ghost clicks' (double clicking)
 })
 
-$('.time').on('touchend click', function(e) {
+$('.time').on('tap click', function(e) {
     e.preventDefault(); //stops 'ghost clicks' (double clicking)
     defaultTime = $(this).children().eq(0).attr('id');
     mark_check_box(defaultTime);
