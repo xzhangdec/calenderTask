@@ -17,21 +17,27 @@ $('.time').on('touchstart click', function(e) {
 
 $('.time').on('touchmove click', function(e) {
     //e.preventDefault(); //stops 'ghost clicks' (double clicking)
-})
+});
+
+$('.time').on('touchend click', function(e) {
+    //e.preventDefault(); //stops 'ghost clicks' (double clicking)
+});
 
 $('.time').on('tap click', function(e) {
     e.preventDefault(); //stops 'ghost clicks' (double clicking)
     defaultTime = $(this).children().eq(0).attr('id');
-    mark_check_box(defaultTime);
+
 
     selectedTime = id_convert_to_Num(defaultTime);
 
     timeArr.push(selectedTime);
 
     $('.selectionBox').show();
+
+    mark_check_box(defaultTime);
 });
 
-$('#startTime').on('click touch', function() {
+$('#startTime').on('tap click', function() {
     startTimeClicked = true;
     if (timeArr.length === 1) {
         if ($(this).attr('id') in timePeriod) {
@@ -41,11 +47,13 @@ $('#startTime').on('click touch', function() {
             timePeriod[$(this).attr('id')] = selectedTime;
         }
     }
+
+    mark_check_box(num_convert_to_id(selectedTime));
     timeArr = [];
     $('.selectionBox').hide();
 });
 
-$('#endTime').on('touchend click', function(e) {
+$('#endTime').on('tap click', function(e) {
     e.preventDefault(); //stops 'ghost clicks' (double clicking)
 
     if (timeArr.length === 1) {
@@ -86,8 +94,9 @@ $('#endTime').on('touchend click', function(e) {
     }
 });
 
-$('#cancel').on('touchend click', function(e) {
+$('#cancel').on('tap click', function(e) {
     e.preventDefault(); //stops 'ghost clicks' (double clicking))
+    
     remove_mark_box(num_convert_to_id(timeArr[0]));
     timeArr = [];
     $('.selectionBox').hide();
