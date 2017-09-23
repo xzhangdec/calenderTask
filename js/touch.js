@@ -12,8 +12,15 @@ var finalPeriod;
 
 
 $('.time').on('touchstart click', function(e) {
-    e.preventDefault(); //stops 'ghost clicks' (double clicking)
+    //e.preventDefault(); //stops 'ghost clicks' (double clicking)
+});
 
+$('.time').on('touchmove click', function(e) {
+    //e.preventDefault(); //stops 'ghost clicks' (double clicking)
+})
+
+$('.time').on('touchend click', function(e) {
+    e.preventDefault(); //stops 'ghost clicks' (double clicking)
     defaultTime = $(this).children().eq(0).attr('id');
     mark_check_box(defaultTime);
 
@@ -22,14 +29,6 @@ $('.time').on('touchstart click', function(e) {
     timeArr.push(selectedTime);
 
     $('.selectionBox').show();
-});
-
-$('.time').on('touchmove click', function(e) {
-    e.preventDefault(); //stops 'ghost clicks' (double clicking)
-})
-
-$('.time').on('touchend click', function(e) {
-    e.preventDefault(); //stops 'ghost clicks' (double clicking)
 });
 
 $('#startTime').on('click touch', function() {
